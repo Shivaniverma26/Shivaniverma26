@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid 2019</title>
+    <Link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container" style= "background-color: #81bcd8" >
+        <h1 class="text-center mt-5">Covid Live Data</h1>
+        <table class="table table-hover">
+        <thread>
+            <tr>
+                <div id = "Total"></div>
+                <th>Total Cases</th>
+                <div id = "Recovered"></div>  
+                <th>Total Recoverd</th>
+                <div id = "Active"></div>
+                <th>Total Active</th>
+            </tr>
+        </thread>
+        <tbody>
+    </tbody>
+</table>
+<form id="myForm">
+<input type = "text" id="country" placeholder="Search any place" >
+<button type = "button" value = "Get Data" onclick="Search()">Search</button>
+</form>
+    </div>
+</body>
+<script>
+ const form = document.getElementById("myForm")
+ form.addEventListener('submit',function(e){
+     e.preventDefault()
+     var country = document.getElementById("country").Global
+     var url = "https://covid-api.mmediagroup.fr/v1/cases"
+
+     covidData(url)
+ })
+ async function covidData(url){
+     let response = await fetch(url)
+     console.log(response)
+     let data = await response.json()
+     console.log(data);
+};
+function Search () {
+    console.log("hiiiii");
+    const text = document.getElementById("country").value;
+   
+    if(text.length===2)
+    {
+    
+      fetch(`https://covid-api.mmediagroup.fr/v1/cases?ab=${text.toUpperCase()}`)
+      .then(response => response.json())
+        .then( data=> {
+            console.log(data);
+        })
+    }
+}
+//     else
+//    {
+//         const conti = ['Asia','Africa','Europe','North America','South America','Australia','Antarctica']
+         
+//         fetch(`https://covid-api.mmediagroup.fr/v1/cases?continent=${conti}`);
+//     }
+//     fetch(` https://covid-api.mmediagroup.fr/v1/cases?country=${}`)
+//   }
+
+</script>
+
+</html>
